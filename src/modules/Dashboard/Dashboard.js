@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { I18nMsg } from '@test-react-chef/i18n'
@@ -7,8 +7,8 @@ import { I18nMsg } from '@test-react-chef/i18n'
 // Utils.
 import { RoutePaths } from '@test-react-chef/utils'
 
-const Dashboard = (props) => {
-  let history = useHistory()
+const Dashboard = () => {
+  const navigate = useNavigate()
   return (
     <>
       <section>
@@ -18,7 +18,7 @@ const Dashboard = (props) => {
           </h1>
           <button
             onClick={() => {
-              history.push(RoutePaths.SignIn)
+              navigate(RoutePaths.SignIn)
             }}
           >
             Click back

@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 // Block Components.
 import { PageLoader } from '@test-react-chef/blocks'
@@ -14,16 +14,20 @@ const DashboardModule = React.lazy(() =>
   import(/* webpackChunkName: "modules/Dashboard" */ './modules/Dashboard')
 )
 
-const Routes = () => {
+const NotFoundModule = React.lazy(() =>
+  import(/* webpackChunkName: "modules/NotFound" */ './modules/NotFound')
+)
+
+const RoutesComponent = () => {
   return (
     <Suspense fallback={<PageLoader />}>
-      <Switch>
-        <Route path={RoutePaths.SignIn} exact component={SignInModule} />
-        <Route path={RoutePaths.Dashboard} component={DashboardModule} />
-        <Redirect to={RoutePaths.NotFound} />
-      </Switch>
+      <Routes>
+        <Route path={RoutePaths.SignIn} exact element={<SignInModule />} />
+        <Route path={RoutePaths.DashBoard} element={<DashboardModule />} />
+        <Route path="*" element={<NotFoundModule />} />
+      </Routes>
     </Suspense>
   )
 }
 
-export default Routes
+export default RoutesComponent
